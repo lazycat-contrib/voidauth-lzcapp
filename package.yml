@@ -1,5 +1,5 @@
 package: lazycat.community.app.voidauth
-version: 1.1.0
+version: 1.14.5
 name: VoidAuth
 description: Single Sign-On for Your Self-Hosted Universe
 min_os_version: 1.5.0

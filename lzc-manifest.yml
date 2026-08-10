@@ -1,38 +1,37 @@
 application:
-    subdomain: voidauth
-    background_task: true
-    public_path:
-        - /
-    upstreams:
-        - location: /
-          backend: http://voidauth:3000
-
+  subdomain: voidauth
+  background_task: true
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://voidauth:3000
 services:
-    voidauth:
-        # ghcr.io/voidauth/voidauth:1.1.0
-        image: ghcr.1ms.run/voidauth/voidauth:1.1.0
-        environment:
+  voidauth:
+    # ghcr.io/voidauth/voidauth:1.1.0
+    # upstream: ghcr.io/voidauth/voidauth:1.14.5
+    image: ghcr.1ms.run/voidauth/voidauth:1.14.5
+    environment:
 {{if .U.enable_custom_domain}}
-            - APP_URL=https://{{.U.custom_domain}}
+      - APP_URL=https://{{.U.custom_domain}}
 {{else}}
-            - APP_URL=https://{{.S.AppDomain}}
+      - APP_URL=https://{{.S.AppDomain}}
 {{end}}
-            - STORAGE_KEY={{ stable_secret "salt-key-base"  }}
-            - DB_PASSWORD=voidauth#se
-            - DB_HOST=voidauth-pg-db
-        binds:
-            - /lzcapp/var/config:/app/config
-        depends_on:
-            - voidauth-pg-db
-
-    voidauth-pg-db:
-        image: registry.lazycat.cloud/czyt/library/postgres:0b2fd10c34119f60
-        environment:
-            - POSTGRES_PASSWORD=voidauth#se
-        binds:
-            - /lzcapp/var/db:/var/lib/postgresql/data
-        healthcheck:
-            test:
-                - CMD-SHELL
-                - pg_isready -U postgres
-            start_period: 90s
+      - STORAGE_KEY={{ stable_secret "salt-key-base"  }}
+      - DB_PASSWORD=voidauth#se
+      - DB_HOST=voidauth-pg-db
+    binds:
+      - /lzcapp/var/config:/app/config
+    depends_on:
+      - voidauth-pg-db
+  voidauth-pg-db:
+    image: registry.lazycat.cloud/czyt/library/postgres:0b2fd10c34119f60
+    environment:
+      - POSTGRES_PASSWORD=voidauth#se
+    binds:
+      - /lzcapp/var/db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      start_period: 90s
