@@ -1,0 +1,43 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/application.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: voidauth
+
+build:
+  run_buildscript: false
+
+images:
+  - id: voidauth
+    target: service
+    service: voidauth
+    source: ghcr.io/voidauth/voidauth
+    channel: stable
+    sort: semver
+    tag_regex: '^\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+      image_template: ghcr.1ms.run/voidauth/voidauth:{tag}
+      require_digest_match: true
+
+stores:
+  official:
+    enabled: false
+    skip_if_version_exists: false
+    retry:
+      enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: VoidAuth
+    summary: 由 GitHub Actions 自动发布

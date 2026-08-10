@@ -1,0 +1,17 @@
+package: lazycat.community.app.voidauth
+version: 1.1.0
+name: VoidAuth
+description: Single Sign-On for Your Self-Hosted Universe
+min_os_version: 1.5.0
+homepage: https://github.com/voidauth/voidauth
+author: voidauth
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: VoidAuth
+    description: 为自托管服务提供统一登录。
+  en:
+    name: VoidAuth
+    description: Single Sign-On for Your Self-Hosted Universe

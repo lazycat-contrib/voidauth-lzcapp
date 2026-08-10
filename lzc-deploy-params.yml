@@ -3,7 +3,7 @@ params:
       type: bool
       name: "Enable Custom Domain"
       description: "Whether to enable custom domain,if false,use lazycat provided domain"
-      default_value: false
+      default_value: "false"
 
     - id: custom_domain
       type: string
