@@ -9,8 +9,8 @@ application:
 services:
   voidauth:
     # ghcr.io/voidauth/voidauth:1.1.0
-    # upstream: ghcr.io/voidauth/voidauth:1.14.5
-    image: ghcr.1ms.run/voidauth/voidauth:1.14.5
+    # upstream: ghcr.io/voidauth/voidauth:1.15.0
+    image: ghcr.1ms.run/voidauth/voidauth:1.15.0
     environment:
 {{if .U.enable_custom_domain}}
       - APP_URL=https://{{.U.custom_domain}}
