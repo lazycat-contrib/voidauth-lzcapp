@@ -1,4 +1,5 @@
 package: lazycat.community.app.voidauth
+license: AGPL-3.0
 version: 1.16.0
 name: VoidAuth
 description: Single Sign-On for Your Self-Hosted Universe
